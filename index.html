@@ -40,6 +40,13 @@
   @keyframes wiggle{0%,100%{transform:rotate(0)}25%{transform:rotate(-6deg)}75%{transform:rotate(6deg)}}
   @keyframes popIn{0%{transform:scale(.6);opacity:0}100%{transform:scale(1);opacity:1}}
   @keyframes blobmove{0%,100%{border-radius:42% 58% 55% 45%/48% 42% 58% 52%}50%{border-radius:58% 42% 45% 55%/55% 58% 42% 45%}}
+  @keyframes twinkle{0%,100%{opacity:.12}50%{opacity:1}}
+  @keyframes ffloat{0%,100%{transform:translate(0,0)}50%{transform:translate(7px,-12px)}}
+  .scene-band{position:relative;line-height:0;background:#0E0E0E;}
+  .scene-band svg{display:block;width:100%;height:auto;}
+  .scene-band .cap{position:absolute;top:20px;left:0;right:0;text-align:center;color:#fff;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;font-size:13px;z-index:2;text-shadow:0 2px 12px rgba(0,0,0,.4);}
+  .scene-band .cap b{color:var(--amarillo);}
+  .ff{transform-box:fill-box;transform-origin:center;}
 
   .reveal{opacity:0;transform:translateY(34px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.3,1);}
   .reveal.in{opacity:1;transform:none;}
@@ -249,7 +256,7 @@
 <section class="hero" style="padding:0;">
   <div class="wrap hero-grid">
     <div>
-      <span class="eyebrow reveal">Delivery local · Yantzaza</span>
+      <span class="eyebrow reveal">Yantzaza · Valle de las Luciérnagas ✨</span>
       <h1 class="reveal d1">Pide de tus locales favoritos, <span class="hl">rápido y confiable</span>.</h1>
       <p class="lead reveal d2">FTFD conecta clientes, locales y repartidores del cantón Yantzaza en una sola app simple. Tú pides, el local prepara y un repartidor te lo lleva — con seguimiento en vivo.</p>
       <div class="hero-ctas reveal d3">
@@ -313,6 +320,47 @@
     </div>
   </div>
 </section>
+
+<!-- ESCENA YANTZAZA: VALLE DE LAS LUCIÉRNAGAS -->
+<div class="scene-band">
+  <div class="cap">El <b>Valle de las Luciérnagas</b> · Yantzaza, Ecuador</div>
+  <svg viewBox="0 0 1440 300" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Montañas y luciérnagas de Yantzaza">
+    <defs>
+      <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#2a1b3d"/><stop offset="45%" stop-color="#7a3b2e"/><stop offset="80%" stop-color="#F26522"/><stop offset="100%" stop-color="#FF9A4D"/>
+      </linearGradient>
+      <radialGradient id="moon" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#FFF3D6"/><stop offset="100%" stop-color="#FFD98A"/></radialGradient>
+    </defs>
+    <rect width="1440" height="300" fill="url(#sky)"/>
+    <circle cx="1180" cy="78" r="40" fill="url(#moon)" opacity=".9"/>
+    <!-- cordillera lejana -->
+    <path d="M0 170 L160 120 L320 165 L480 110 L660 160 L820 100 L1010 155 L1200 108 L1440 158 V300 H0 Z" fill="#231033" opacity=".75"/>
+    <!-- montañas medias -->
+    <path d="M0 210 L220 150 L430 205 L640 140 L900 200 L1150 150 L1440 200 V300 H0 Z" fill="#17321f"/>
+    <!-- colinas frontales (verde amazónico) -->
+    <path d="M0 250 L260 205 L540 250 L820 210 L1120 252 L1440 215 V300 H0 Z" fill="#20492c"/>
+    <!-- río -->
+    <path d="M520 300 C620 250 760 250 820 215 C880 250 1000 255 1120 252 L1180 300 Z" fill="#bfe8ff" opacity=".55"/>
+    <!-- palmeras silueta -->
+    <g fill="#0f2416">
+      <path d="M120 250 q4-30 0-44 q14 8 22 2 q-10 10-16 10 q12-2 20 6 q-12 2-18 0 q10 6 12 16 q-10-8-16-8 q6 10 4 22z"/>
+      <path d="M1320 250 q4-26 0-40 q12 7 20 2 q-9 9-14 9 q10-2 18 6 q-11 2-16 0 q9 6 10 16 q-9-8-14-8 q5 9 4 22z"/>
+    </g>
+    <!-- LUCIÉRNAGAS -->
+    <g>
+      <g class="ff" style="animation:ffloat 6s ease-in-out infinite"><circle cx="300" cy="150" r="9" fill="#FFE38A" opacity=".25"/><circle cx="300" cy="150" r="3" fill="#FFF3C4" style="animation:twinkle 2.6s ease-in-out infinite"/></g>
+      <g class="ff" style="animation:ffloat 7s ease-in-out infinite .5s"><circle cx="520" cy="110" r="8" fill="#FFE38A" opacity=".25"/><circle cx="520" cy="110" r="2.6" fill="#FFF3C4" style="animation:twinkle 3.1s ease-in-out infinite .4s"/></g>
+      <g class="ff" style="animation:ffloat 5.5s ease-in-out infinite .2s"><circle cx="700" cy="175" r="9" fill="#FFE38A" opacity=".25"/><circle cx="700" cy="175" r="3" fill="#FFF3C4" style="animation:twinkle 2.2s ease-in-out infinite .9s"/></g>
+      <g class="ff" style="animation:ffloat 6.5s ease-in-out infinite .8s"><circle cx="880" cy="130" r="8" fill="#FFE38A" opacity=".25"/><circle cx="880" cy="130" r="2.6" fill="#FFF3C4" style="animation:twinkle 2.8s ease-in-out infinite .2s"/></g>
+      <g class="ff" style="animation:ffloat 7.5s ease-in-out infinite .3s"><circle cx="1040" cy="165" r="9" fill="#FFE38A" opacity=".25"/><circle cx="1040" cy="165" r="3" fill="#FFF3C4" style="animation:twinkle 3.4s ease-in-out infinite .6s"/></g>
+      <g class="ff" style="animation:ffloat 6s ease-in-out infinite 1s"><circle cx="400" cy="195" r="7" fill="#FFE38A" opacity=".22"/><circle cx="400" cy="195" r="2.4" fill="#FFF3C4" style="animation:twinkle 2.5s ease-in-out infinite 1.1s"/></g>
+      <g class="ff" style="animation:ffloat 7s ease-in-out infinite .6s"><circle cx="980" cy="205" r="7" fill="#FFE38A" opacity=".22"/><circle cx="980" cy="205" r="2.4" fill="#FFF3C4" style="animation:twinkle 3s ease-in-out infinite .3s"/></g>
+      <g class="ff" style="animation:ffloat 5.8s ease-in-out infinite .9s"><circle cx="1180" cy="185" r="8" fill="#FFE38A" opacity=".25"/><circle cx="1180" cy="185" r="2.8" fill="#FFF3C4" style="animation:twinkle 2.7s ease-in-out infinite .7s"/></g>
+      <g class="ff" style="animation:ffloat 6.8s ease-in-out infinite .1s"><circle cx="210" cy="190" r="7" fill="#FFE38A" opacity=".22"/><circle cx="210" cy="190" r="2.4" fill="#FFF3C4" style="animation:twinkle 2.9s ease-in-out infinite 1.3s"/></g>
+      <g class="ff" style="animation:ffloat 7.2s ease-in-out infinite .4s"><circle cx="620" cy="205" r="7" fill="#FFE38A" opacity=".22"/><circle cx="620" cy="205" r="2.4" fill="#FFF3C4" style="animation:twinkle 3.2s ease-in-out infinite .5s"/></g>
+    </g>
+  </svg>
+</div>
 
 <!-- BANDA EN MOVIMIENTO -->
 <div class="road-band">
