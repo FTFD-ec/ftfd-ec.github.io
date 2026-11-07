@@ -7,37 +7,57 @@
 <meta name="description" content="FTFD conecta clientes, locales y repartidores en Yantzaza. Pide de tus locales favoritos con entrega local, rápida y confiable. Paga en efectivo, transferencia o De Una.">
 <style>
   :root{
-    --naranja:#F26522; --naranja-2:#FF8A3D; --naranja-soft:#FFF1EA;
+    --naranja:#F26522; --naranja-2:#FF8A3D; --amarillo:#FFC233; --naranja-soft:#FFF1EA;
     --negro:#0E0E0E; --tinta:#1a1a1a; --gris:#5b6168; --gris-2:#8a9099;
     --linea:#ececec; --crema:#FBF8F5; --blanco:#fff;
     --sombra:0 10px 30px rgba(14,14,14,.08); --sombra-lg:0 24px 60px rgba(242,101,34,.18);
-    --radio:16px;
+    --radio:16px; --stroke:#0E0E0E;
   }
   *{box-sizing:border-box;}
   html{scroll-behavior:smooth;}
-  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--tinta);background:var(--blanco);line-height:1.6;-webkit-font-smoothing:antialiased;}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--tinta);background:var(--blanco);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
   a{color:inherit;text-decoration:none;}
   img,svg{max-width:100%;}
   .wrap{max-width:1140px;margin:0 auto;padding:0 22px;}
   .btn{display:inline-flex;align-items:center;gap:8px;font-weight:700;border-radius:999px;padding:13px 24px;font-size:15px;cursor:pointer;border:2px solid transparent;transition:transform .15s ease,box-shadow .15s ease,background .15s;}
   .btn-primary{background:var(--naranja);color:#fff;box-shadow:0 8px 20px rgba(242,101,34,.35);}
-  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 26px rgba(242,101,34,.45);}
+  .btn-primary:hover{transform:translateY(-2px) scale(1.02);box-shadow:0 14px 30px rgba(242,101,34,.5);}
   .btn-ghost{background:#fff;color:var(--negro);border-color:#e4e4e4;}
   .btn-ghost:hover{border-color:var(--negro);}
   .btn-dark{background:var(--negro);color:#fff;}
-  .btn-dark:hover{transform:translateY(-2px);}
+  .btn-dark:hover{transform:translateY(-2px) scale(1.02);}
   .eyebrow{display:inline-block;font-size:13px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--naranja);background:var(--naranja-soft);padding:6px 14px;border-radius:999px;}
 
+  /* ===== ANIMACIONES ===== */
+  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-16px)}}
+  @keyframes bob{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(-6px) rotate(1deg)}}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  @keyframes drive{0%{transform:translateX(-30vw)}100%{transform:translateX(115vw)}}
+  @keyframes steam{0%{opacity:0;transform:translateY(0) scale(.8)}30%{opacity:.8}100%{opacity:0;transform:translateY(-22px) scale(1.3)}}
+  @keyframes dash{to{stroke-dashoffset:-40}}
+  @keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+  @keyframes pulse{0%,100%{box-shadow:0 8px 20px rgba(242,101,34,.35)}50%{box-shadow:0 8px 34px rgba(242,101,34,.65)}}
+  @keyframes wiggle{0%,100%{transform:rotate(0)}25%{transform:rotate(-6deg)}75%{transform:rotate(6deg)}}
+  @keyframes popIn{0%{transform:scale(.6);opacity:0}100%{transform:scale(1);opacity:1}}
+  @keyframes blobmove{0%,100%{border-radius:42% 58% 55% 45%/48% 42% 58% 52%}50%{border-radius:58% 42% 45% 55%/55% 58% 42% 45%}}
+
+  .reveal{opacity:0;transform:translateY(34px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.3,1);}
+  .reveal.in{opacity:1;transform:none;}
+  .reveal.d1{transition-delay:.08s}.reveal.d2{transition-delay:.16s}.reveal.d3{transition-delay:.24s}
+
   /* HEADER */
-  header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.88);backdrop-filter:blur(10px);border-bottom:1px solid var(--linea);}
+  header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-filter:blur(10px);border-bottom:1px solid var(--linea);}
   .nav{display:flex;align-items:center;justify-content:space-between;height:68px;}
   .brand{display:flex;align-items:center;gap:10px;font-weight:900;font-size:22px;letter-spacing:.5px;}
-  .brand .mark{width:38px;height:38px;border-radius:10px;background:var(--negro);display:grid;place-items:center;color:#fff;font-size:15px;font-weight:900;}
+  .brand .mark{width:38px;height:38px;border-radius:10px;background:var(--negro);display:grid;place-items:center;color:#fff;font-size:15px;font-weight:900;transition:transform .3s;}
+  .brand:hover .mark{transform:rotate(-8deg) scale(1.08);}
   .brand .mark b{color:var(--naranja);}
   .brand small{display:block;font-size:10px;font-weight:600;letter-spacing:.5px;color:var(--gris-2);margin-top:-2px;}
   .nav-links{display:flex;align-items:center;gap:30px;}
-  .nav-links a{font-size:15px;font-weight:600;color:var(--gris);}
+  .nav-links a{font-size:15px;font-weight:600;color:var(--gris);position:relative;}
+  .nav-links a::after{content:"";position:absolute;left:0;bottom:-6px;height:2px;width:0;background:var(--naranja);transition:width .25s;}
   .nav-links a:hover{color:var(--negro);}
+  .nav-links a:hover::after{width:100%;}
   .nav-cta{display:flex;align-items:center;gap:12px;}
   .menu-btn{display:none;background:none;border:0;cursor:pointer;padding:8px;}
   .menu-btn span{display:block;width:22px;height:2px;background:var(--negro);margin:4px 0;border-radius:2px;}
@@ -45,19 +65,19 @@
   /* HERO */
   .hero{position:relative;overflow:hidden;background:linear-gradient(180deg,#fff 0%,var(--crema) 100%);}
   .hero::before{content:"";position:absolute;top:-180px;right:-160px;width:520px;height:520px;background:radial-gradient(circle,rgba(242,101,34,.18),transparent 65%);}
-  .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center;padding:64px 0 70px;position:relative;}
+  .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center;padding:60px 0 56px;position:relative;}
   .hero h1{font-size:clamp(32px,5vw,52px);line-height:1.08;margin:18px 0 16px;letter-spacing:-1px;font-weight:900;}
-  .hero h1 .hl{color:var(--naranja);}
+  .hero h1 .hl{color:var(--naranja);position:relative;}
   .hero p.lead{font-size:18px;color:var(--gris);max-width:520px;margin:0 0 28px;}
   .hero-ctas{display:flex;gap:14px;flex-wrap:wrap;}
+  .hero-ctas .btn-primary{animation:pulse 2.4s ease-in-out infinite;}
   .hero-stats{display:flex;gap:28px;margin-top:34px;flex-wrap:wrap;}
   .hero-stats .s b{display:block;font-size:26px;font-weight:900;color:var(--negro);}
   .hero-stats .s span{font-size:13px;color:var(--gris-2);font-weight:600;}
 
-  /* PHONE MOCKUP */
   .phone-wrap{display:grid;place-items:center;position:relative;}
-  .blob{position:absolute;width:360px;height:360px;background:linear-gradient(135deg,var(--naranja),var(--naranja-2));border-radius:42% 58% 55% 45%/48% 42% 58% 52%;filter:blur(2px);opacity:.95;}
-  .phone{position:relative;width:260px;background:#0b0b0b;border-radius:38px;padding:12px;box-shadow:var(--sombra-lg);}
+  .blob{position:absolute;width:360px;height:360px;background:linear-gradient(135deg,var(--naranja),var(--naranja-2));animation:blobmove 9s ease-in-out infinite;opacity:.95;}
+  .phone{position:relative;width:260px;background:#0b0b0b;border-radius:38px;padding:12px;box-shadow:var(--sombra-lg);animation:float 5s ease-in-out infinite;}
   .phone .screen{background:#fff;border-radius:28px;overflow:hidden;}
   .ph-top{background:var(--negro);color:#fff;padding:14px 16px 16px;}
   .ph-top .loc{font-size:11px;color:#bdbdbd;}
@@ -78,6 +98,18 @@
   .ph-order .l{font-size:11px;}
   .ph-order .l b{display:block;font-size:13px;}
   .ph-order .go{background:var(--naranja);color:#fff;font-size:11px;font-weight:800;padding:7px 12px;border-radius:999px;}
+  /* mini repartidor flotante junto al teléfono */
+  .mini-rider{position:absolute;bottom:-6px;left:-26px;width:120px;animation:bob 3.2s ease-in-out infinite;z-index:3;}
+
+  /* BANDA EN MOVIMIENTO (repartidor cruzando) */
+  .road-band{position:relative;background:var(--negro);overflow:hidden;height:150px;}
+  .road-band .road{position:absolute;bottom:34px;left:0;right:0;height:3px;}
+  .road-band .road svg{width:100%;height:3px;}
+  .road-line{stroke:#F26522;stroke-width:3;stroke-dasharray:18 14;animation:dash 1s linear infinite;}
+  .driver{position:absolute;bottom:26px;left:0;width:210px;animation:drive 9s linear infinite;}
+  .road-band .tag{position:absolute;top:18px;left:0;right:0;text-align:center;color:#fff;font-weight:800;letter-spacing:2px;font-size:13px;text-transform:uppercase;opacity:.9;}
+  .road-band .tag b{color:var(--naranja);}
+  .wheel{transform-box:fill-box;transform-origin:center;animation:spin 1.1s linear infinite;}
 
   /* SECTIONS */
   section{padding:76px 0;}
@@ -85,30 +117,37 @@
   .sec-head h2{font-size:clamp(26px,3.6vw,38px);font-weight:900;letter-spacing:-.6px;margin:14px 0 10px;}
   .sec-head p{color:var(--gris);font-size:17px;margin:0;}
 
-  /* CATEGORIES */
-  .cats{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;}
-  .cat{display:flex;align-items:center;gap:9px;background:#fff;border:1px solid var(--linea);border-radius:999px;padding:11px 18px;font-weight:700;font-size:15px;box-shadow:var(--sombra);transition:transform .15s,border-color .15s;}
+  /* CATEGORIES MARQUEE */
+  .marquee{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);}
+  .marquee-track{display:flex;gap:14px;width:max-content;animation:marquee 26s linear infinite;}
+  .marquee:hover .marquee-track{animation-play-state:paused;}
+  .cat{display:flex;align-items:center;gap:9px;background:#fff;border:1px solid var(--linea);border-radius:999px;padding:11px 18px;font-weight:700;font-size:15px;box-shadow:var(--sombra);white-space:nowrap;transition:transform .15s,border-color .15s;}
   .cat:hover{transform:translateY(-3px);border-color:var(--naranja);}
   .cat svg{width:22px;height:22px;color:var(--naranja);}
 
   /* STEPS */
   .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;}
-  .step{background:var(--crema);border-radius:var(--radio);padding:30px 26px;position:relative;border:1px solid var(--linea);}
+  .step{background:var(--crema);border-radius:var(--radio);padding:30px 26px;position:relative;border:1px solid var(--linea);transition:transform .2s,box-shadow .2s;}
+  .step:hover{transform:translateY(-6px);box-shadow:var(--sombra);}
   .step .num{position:absolute;top:-16px;left:26px;width:38px;height:38px;border-radius:12px;background:var(--naranja);color:#fff;font-weight:900;display:grid;place-items:center;box-shadow:0 8px 16px rgba(242,101,34,.35);}
+  .step:hover .num{animation:wiggle .5s ease;}
   .step .ic{width:52px;height:52px;color:var(--negro);margin:10px 0 14px;}
   .step h3{margin:0 0 6px;font-size:18px;font-weight:800;}
   .step p{margin:0;color:var(--gris);font-size:15px;}
 
-  /* PROFILES */
+  /* PROFILES (comic) */
   .profiles{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
-  .profile{border-radius:var(--radio);padding:30px 26px;color:#fff;position:relative;overflow:hidden;min-height:260px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:var(--sombra);}
+  .profile{border-radius:22px;padding:28px 24px 26px;color:#fff;position:relative;overflow:hidden;box-shadow:var(--sombra);transition:transform .2s;}
+  .profile:hover{transform:translateY(-6px);}
   .profile.c{background:linear-gradient(145deg,#141414,#2a2a2a);}
   .profile.l{background:linear-gradient(145deg,var(--naranja),var(--naranja-2));}
   .profile.r{background:linear-gradient(145deg,#1d1d1d,#3a3a3a);}
-  .profile .ic{width:48px;height:48px;color:#fff;opacity:.95;}
-  .profile h3{font-size:21px;font-weight:900;margin:16px 0 8px;}
-  .profile p{margin:0;font-size:15px;opacity:.9;}
-  .profile ul{margin:14px 0 0;padding:0;list-style:none;font-size:14px;opacity:.95;}
+  .profile .char{height:150px;display:grid;place-items:center;margin-bottom:6px;}
+  .profile .char svg{height:150px;}
+  .profile:hover .char svg{animation:bob 2.2s ease-in-out infinite;}
+  .profile h3{font-size:21px;font-weight:900;margin:6px 0 8px;}
+  .profile p{margin:0;font-size:15px;opacity:.92;}
+  .profile ul{margin:14px 0 0;padding:0;list-style:none;font-size:14px;opacity:.96;}
   .profile li{display:flex;gap:8px;align-items:center;margin:7px 0;}
   .profile li svg{width:16px;height:16px;flex:none;}
 
@@ -117,7 +156,8 @@
   .pay h2{font-size:clamp(24px,3.2vw,34px);font-weight:900;margin:0 0 8px;}
   .pay p{color:#b9b9b9;margin:0 auto 30px;max-width:520px;}
   .pay-badges{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
-  .pay-b{background:#1c1c1c;border:1px solid #2c2c2c;border-radius:14px;padding:18px 26px;min-width:150px;display:flex;align-items:center;gap:12px;}
+  .pay-b{background:#1c1c1c;border:1px solid #2c2c2c;border-radius:14px;padding:18px 26px;min-width:150px;display:flex;align-items:center;gap:12px;transition:transform .2s,border-color .2s;}
+  .pay-b:hover{transform:translateY(-4px);border-color:var(--naranja);}
   .pay-b svg{width:28px;height:28px;color:var(--naranja);}
   .pay-b b{font-size:16px;}
   .pay-b span{display:block;font-size:12px;color:var(--gris-2);}
@@ -127,12 +167,14 @@
   .download h2{font-size:clamp(26px,3.4vw,36px);font-weight:900;letter-spacing:-.5px;margin:12px 0 10px;}
   .download p{color:var(--gris);margin:0 0 24px;}
   .store-badges{display:flex;gap:14px;flex-wrap:wrap;}
-  .store{display:flex;align-items:center;gap:12px;background:var(--negro);color:#fff;border-radius:14px;padding:12px 20px;}
+  .store{display:flex;align-items:center;gap:12px;background:var(--negro);color:#fff;border-radius:14px;padding:12px 20px;transition:transform .2s;}
+  .store:hover{transform:translateY(-4px);}
   .store svg{width:26px;height:26px;}
   .store small{display:block;font-size:10px;color:#bdbdbd;line-height:1;}
   .store b{font-size:16px;line-height:1.2;}
   .store .soon{font-size:9px;background:var(--naranja);color:#fff;padding:2px 7px;border-radius:999px;font-weight:800;margin-left:4px;}
   .dl-art{display:grid;place-items:center;}
+  .dl-art svg{animation:float 5s ease-in-out infinite;}
 
   /* FAQ */
   .faq{max-width:760px;margin:0 auto;}
@@ -144,10 +186,11 @@
   .q .a{padding:0 22px 18px;color:var(--gris);font-size:15px;}
 
   /* CTA FINAL */
-  .cta-final{text-align:center;background:linear-gradient(145deg,var(--naranja),var(--naranja-2));color:#fff;border-radius:24px;padding:56px 32px;box-shadow:var(--sombra-lg);}
+  .cta-final{position:relative;overflow:hidden;text-align:center;background:linear-gradient(145deg,var(--naranja),var(--naranja-2));color:#fff;border-radius:24px;padding:56px 32px;box-shadow:var(--sombra-lg);}
   .cta-final h2{font-size:clamp(26px,3.6vw,38px);font-weight:900;margin:0 0 10px;letter-spacing:-.5px;}
   .cta-final p{opacity:.95;margin:0 auto 26px;max-width:520px;}
   .cta-final .btn-dark{background:#0E0E0E;}
+  .cta-final .pin{position:absolute;opacity:.18;}
 
   /* FOOTER */
   footer{background:var(--negro);color:#cfcfcf;padding:56px 0 30px;margin-top:10px;}
@@ -160,7 +203,6 @@
   footer a:hover{color:var(--naranja);}
   .foot-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;padding-top:22px;font-size:13px;color:var(--gris-2);}
 
-  /* RESPONSIVE */
   @media(max-width:900px){
     .hero-grid,.download{grid-template-columns:1fr;}
     .phone-wrap{order:-1;margin-bottom:10px;}
@@ -173,8 +215,11 @@
   }
   @media(max-width:560px){
     .foot-grid{grid-template-columns:1fr;}
-    .download{padding:30px 22px;}
-    .pay{padding:36px 20px;}
+    .download{padding:30px 22px;}.pay{padding:36px 20px;}
+  }
+  @media(prefers-reduced-motion:reduce){
+    *{animation:none!important;}
+    .reveal{opacity:1!important;transform:none!important;}
   }
 </style>
 </head>
@@ -204,25 +249,39 @@
 <section class="hero" style="padding:0;">
   <div class="wrap hero-grid">
     <div>
-      <span class="eyebrow">Delivery local · Yantzaza</span>
-      <h1>Pide de tus locales favoritos, <span class="hl">rápido y confiable</span>.</h1>
-      <p class="lead">FTFD conecta clientes, locales y repartidores del cantón Yantzaza en una sola app simple. Tú pides, el local prepara y un repartidor te lo lleva — con seguimiento en vivo.</p>
-      <div class="hero-ctas">
+      <span class="eyebrow reveal">Delivery local · Yantzaza</span>
+      <h1 class="reveal d1">Pide de tus locales favoritos, <span class="hl">rápido y confiable</span>.</h1>
+      <p class="lead reveal d2">FTFD conecta clientes, locales y repartidores del cantón Yantzaza en una sola app simple. Tú pides, el local prepara y un repartidor te lo lleva — con seguimiento en vivo.</p>
+      <div class="hero-ctas reveal d3">
         <a href="#descarga" class="btn btn-primary">Descargar la app
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </a>
         <a href="#perfiles" class="btn btn-ghost">Tengo un local</a>
       </div>
-      <div class="hero-stats">
+      <div class="hero-stats reveal d3">
         <div class="s"><b>En vivo</b><span>Seguimiento del pedido</span></div>
         <div class="s"><b>3 pagos</b><span>Efectivo · Transfer · De Una</span></div>
         <div class="s"><b>100% local</b><span>Hecho para Yantzaza</span></div>
       </div>
     </div>
 
-    <!-- PHONE MOCKUP -->
     <div class="phone-wrap">
       <div class="blob"></div>
+      <!-- mini repartidor cómic flotando -->
+      <svg class="mini-rider" viewBox="0 0 200 150">
+        <g stroke="#0E0E0E" stroke-width="5" stroke-linejoin="round" stroke-linecap="round">
+          <circle cx="52" cy="112" r="24" fill="#111"/><circle cx="52" cy="112" r="9" fill="#fff"/>
+          <circle cx="150" cy="112" r="24" fill="#111"/><circle cx="150" cy="112" r="9" fill="#fff"/>
+          <path d="M40 112 H120 L140 86 h16" fill="none"/>
+          <path d="M66 112 q6-34 34-34 h20 l10 22 h-44 z" fill="#F26522"/>
+          <rect x="60" y="54" width="30" height="30" rx="5" fill="#111"/>
+          <path d="M90 78 q14-2 24 8" fill="none"/>
+          <circle cx="112" cy="58" r="15" fill="#FFC233"/>
+          <path d="M98 56 a15 13 0 0 1 28 0 z" fill="#F26522"/>
+          <circle cx="112" cy="60" r="2.4" fill="#111" stroke="none"/>
+          <path d="M106 66 q6 4 12 0" fill="none" stroke-width="3"/>
+        </g>
+      </svg>
       <div class="phone">
         <div class="screen">
           <div class="ph-top">
@@ -234,9 +293,7 @@
           </div>
           <div class="ph-body">
             <div class="ph-cat">
-              <span class="ph-chip">Todo</span>
-              <span class="ph-chip alt">Comida</span>
-              <span class="ph-chip alt">Farmacia</span>
+              <span class="ph-chip">Todo</span><span class="ph-chip alt">Comida</span><span class="ph-chip alt">Farmacia</span>
             </div>
             <div class="ph-card">
               <div class="ph-img"><span class="ph-badge">★ 4.8 · 25 min</span></div>
@@ -244,7 +301,7 @@
             </div>
             <div class="ph-card">
               <div class="ph-img two"><span class="ph-badge">★ 4.6 · 30 min</span></div>
-              <div class="ph-meta"><div class="t">Pollos & Parrilla</div><div class="d"><span>Pollo asado</span><span>·</span><span>Envío $1.20</span></div></div>
+              <div class="ph-meta"><div class="t">Pollos &amp; Parrilla</div><div class="d"><span>Pollo asado</span><span>·</span><span>Envío $1.20</span></div></div>
             </div>
             <div class="ph-order">
               <div class="l">Tu pedido va en camino<b>Repartidor asignado 🛵</b></div>
@@ -257,48 +314,78 @@
   </div>
 </section>
 
-<!-- CATEGORIES -->
-<section style="padding-top:64px;padding-bottom:30px;">
-  <div class="wrap">
-    <div class="sec-head" style="margin-bottom:34px;">
-      <span class="eyebrow">Todo en un solo lugar</span>
-      <h2>Lo que necesitas, entregado</h2>
-      <p>Desde el almuerzo hasta la farmacia de tu barrio.</p>
-    </div>
-    <div class="cats">
+<!-- BANDA EN MOVIMIENTO -->
+<div class="road-band">
+  <div class="tag">Tu pedido, <b>en camino</b> 🛵</div>
+  <div class="road"><svg viewBox="0 0 100 3" preserveAspectRatio="none"><line class="road-line" x1="0" y1="1.5" x2="100" y2="1.5"/></svg></div>
+  <!-- repartidor cómic que cruza -->
+  <svg class="driver" viewBox="0 0 230 150">
+    <g stroke="#0E0E0E" stroke-width="5" stroke-linejoin="round" stroke-linecap="round">
+      <!-- líneas de velocidad -->
+      <g stroke="#F26522" stroke-width="4"><line x1="2" y1="60" x2="34" y2="60"/><line x1="-6" y1="80" x2="30" y2="80"/><line x1="4" y1="100" x2="30" y2="100"/></g>
+      <!-- ruedas -->
+      <circle cx="62" cy="118" r="26" fill="#111"/><circle class="wheel" cx="62" cy="118" r="26" fill="none" stroke="#333" stroke-width="3"/><circle cx="62" cy="118" r="9" fill="#fff"/>
+      <circle cx="168" cy="118" r="26" fill="#111"/><circle class="wheel" cx="168" cy="118" r="26" fill="none" stroke="#333" stroke-width="3"/><circle cx="168" cy="118" r="9" fill="#fff"/>
+      <!-- cuerpo moto -->
+      <path d="M48 118 H132 L158 86 h18" fill="none"/>
+      <path d="M78 118 q8-40 40-40 h24 l12 26 h-54 z" fill="#F26522"/>
+      <!-- caja delivery -->
+      <rect x="66" y="52" width="34" height="34" rx="6" fill="#111"/>
+      <text x="83" y="75" font-size="18" font-weight="900" fill="#F26522" stroke="none" text-anchor="middle" font-family="Arial">F</text>
+      <!-- brazo al manubrio -->
+      <path d="M104 80 q18-4 30 8" fill="none"/>
+      <!-- cabeza + casco -->
+      <circle cx="126" cy="56" r="17" fill="#FFC233"/>
+      <path d="M110 54 a16 15 0 0 1 32 0 z" fill="#F26522"/>
+      <rect x="120" y="50" width="16" height="7" rx="3" fill="#bfe3ff"/>
+      <circle cx="128" cy="60" r="2.6" fill="#111" stroke="none"/>
+      <path d="M121 66 q7 5 14 0" fill="none" stroke-width="3"/>
+    </g>
+  </svg>
+</div>
+
+<!-- CATEGORIES MARQUEE -->
+<section style="padding-top:60px;padding-bottom:40px;">
+  <div class="sec-head reveal" style="margin-bottom:34px;">
+    <span class="eyebrow">Todo en un solo lugar</span>
+    <h2>Lo que necesitas, entregado</h2>
+    <p>Desde el almuerzo hasta la farmacia de tu barrio.</p>
+  </div>
+  <div class="marquee">
+    <div class="marquee-track" id="mtrack">
       <div class="cat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 11h16M6 11V7a2 2 0 012-2h8a2 2 0 012 2v4M5 11l1 8h12l1-8"/></svg>Almuerzos</div>
       <div class="cat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11l9-7 9 7M5 10v10h14V10"/></svg>Comida rápida</div>
       <div class="cat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Pollo asado</div>
       <div class="cat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3v5a4 4 0 008 0V3M12 12v9"/></svg>Postres</div>
-      <div class="cat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v18M3 12h18" /></svg>Farmacia</div>
+      <div class="cat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v18M3 12h18"/></svg>Farmacia</div>
       <div class="cat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16l-1.5 12a2 2 0 01-2 2H7.5a2 2 0 01-2-2L4 6zM9 6V4h6v2"/></svg>Víveres</div>
-      <div class="cat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8h1a4 4 0 010 8h-1M6 8h12v9a3 3 0 01-3 3H9a3 3 0 01-3-3V8z"/></svg>Café & bebidas</div>
+      <div class="cat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8h1a4 4 0 010 8h-1M6 8h12v9a3 3 0 01-3 3H9a3 3 0 01-3-3V8z"/></svg>Café &amp; bebidas</div>
     </div>
   </div>
 </section>
 
 <!-- COMO FUNCIONA -->
-<section id="como">
+<section id="como" style="padding-top:40px;">
   <div class="wrap">
-    <div class="sec-head">
+    <div class="sec-head reveal">
       <span class="eyebrow">Simple y rápido</span>
       <h2>Cómo funciona</h2>
       <p>En tres pasos tu pedido llega a la puerta.</p>
     </div>
     <div class="steps">
-      <div class="step">
+      <div class="step reveal">
         <div class="num">1</div>
         <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6h18M3 12h18M3 18h12"/><circle cx="19" cy="18" r="2.4"/></svg>
         <h3>Elige tu local</h3>
         <p>Explora los locales de Yantzaza, mira el menú con fotos y precios, y arma tu carrito.</p>
       </div>
-      <div class="step">
+      <div class="step reveal d1">
         <div class="num">2</div>
         <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="14" height="16" rx="2"/><path d="M17 8h3l1 3v5a2 2 0 01-2 2h-2"/><circle cx="7.5" cy="19" r="1.6"/></svg>
         <h3>Confirma y paga</h3>
         <p>Pon tu dirección y ubicación GPS, elige efectivo, transferencia o De Una, y confirma.</p>
       </div>
-      <div class="step">
+      <div class="step reveal d2">
         <div class="num">3</div>
         <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-5.5-7-11a7 7 0 0114 0c0 5.5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
         <h3>Sigue tu pedido</h3>
@@ -308,43 +395,93 @@
   </div>
 </section>
 
-<!-- PERFILES -->
+<!-- PERFILES (comic) -->
 <section id="perfiles" style="background:var(--crema);">
   <div class="wrap">
-    <div class="sec-head">
+    <div class="sec-head reveal">
       <span class="eyebrow">Para todos</span>
       <h2>Una plataforma, tres roles</h2>
       <p>Clientes, locales y repartidores conectados en tiempo real.</p>
     </div>
     <div class="profiles">
-      <div class="profile c">
-        <div>
-          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0112 0v1"/></svg>
-          <h3>Clientes</h3>
-          <p>Pide en minutos, paga como prefieras y sigue tu pedido hasta la puerta.</p>
+      <!-- CLIENTE -->
+      <div class="profile c reveal">
+        <div class="char">
+          <svg viewBox="0 0 150 150">
+            <g stroke="#0E0E0E" stroke-width="4.5" stroke-linejoin="round" stroke-linecap="round">
+              <path d="M38 140 q0-34 37-34 q37 0 37 34 z" fill="#F26522"/>
+              <circle cx="75" cy="62" r="30" fill="#FFC233"/>
+              <path d="M47 58 q0-30 28-30 q28 0 28 30 q-14-10-28-10 q-14 0-28 10z" fill="#111"/>
+              <circle cx="65" cy="62" r="3" fill="#111" stroke="none"/><circle cx="86" cy="62" r="3" fill="#111" stroke="none"/>
+              <path d="M64 76 q11 9 22 0" fill="none" stroke-width="3.5"/>
+              <!-- teléfono en la mano -->
+              <rect x="96" y="96" width="24" height="36" rx="5" fill="#111"/><rect x="100" y="101" width="16" height="22" rx="2" fill="#bfe3ff" stroke="none"/>
+            </g>
+          </svg>
         </div>
+        <h3>Clientes</h3>
+        <p>Pide en minutos, paga como prefieras y sigue tu pedido hasta la puerta.</p>
         <ul>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="#F26522" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg>Catálogo con fotos y precios</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="#F26522" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg>Seguimiento del estado en vivo</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="#F26522" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg>Seguimiento en vivo</li>
         </ul>
       </div>
-      <div class="profile l">
-        <div>
-          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 9h16l-1 11H5L4 9zM4 9l2-5h12l2 5"/></svg>
-          <h3>Locales</h3>
-          <p>Recibe pedidos con alerta, gestiona tu menú y tus horarios desde un panel.</p>
+
+      <!-- LOCAL (cocinero) -->
+      <div class="profile l reveal d1">
+        <div class="char">
+          <svg viewBox="0 0 150 150">
+            <!-- vapor -->
+            <g stroke="#fff" stroke-width="3" fill="none" opacity=".8" stroke-linecap="round">
+              <path d="M60 30 q6-8 0-16"><animate attributeName="opacity" values="0;.9;0" dur="2.4s" repeatCount="indefinite"/></path>
+              <path d="M90 30 q6-8 0-16"><animate attributeName="opacity" values="0;.9;0" dur="2.4s" begin=".8s" repeatCount="indefinite"/></path>
+            </g>
+            <g stroke="#0E0E0E" stroke-width="4.5" stroke-linejoin="round" stroke-linecap="round">
+              <path d="M40 140 q0-32 35-32 q35 0 35 32 z" fill="#fff"/>
+              <circle cx="75" cy="66" r="28" fill="#FFC233"/>
+              <!-- gorro de chef -->
+              <path d="M50 46 a14 14 0 0 1 2-26 a15 15 0 0 1 46 0 a14 14 0 0 1 2 26 z" fill="#fff"/>
+              <path d="M50 46 h50" fill="none"/>
+              <circle cx="66" cy="66" r="3" fill="#111" stroke="none"/><circle cx="85" cy="66" r="3" fill="#111" stroke="none"/>
+              <path d="M64 78 q11 9 22 0" fill="none" stroke-width="3.5"/>
+              <!-- bigote cómic -->
+              <path d="M66 74 q9 6 18 0" fill="none" stroke-width="5"/>
+              <!-- plato con domo -->
+              <path d="M44 128 h62" /><path d="M54 128 a21 16 0 0 1 42 0" fill="#F26522"/><circle cx="75" cy="106" r="3.5" fill="#111" stroke="none"/>
+            </g>
+          </svg>
         </div>
+        <h3>Locales</h3>
+        <p>Recibe pedidos con alerta, gestiona tu menú y tus horarios desde un panel.</p>
         <ul>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg>Alerta de nuevo pedido</li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg>Menú y horarios editables</li>
         </ul>
       </div>
-      <div class="profile r">
-        <div>
-          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="6" cy="17" r="2.5"/><circle cx="18" cy="17" r="2.5"/><path d="M8.5 17h7l-2-7H6l1 4M14 10l2-4h3"/></svg>
-          <h3>Repartidores</h3>
-          <p>Ve pedidos disponibles, tómalos y navega al destino con Google Maps.</p>
+
+      <!-- REPARTIDOR -->
+      <div class="profile r reveal d2">
+        <div class="char">
+          <svg viewBox="0 0 150 150">
+            <g stroke="#0E0E0E" stroke-width="4.5" stroke-linejoin="round" stroke-linecap="round">
+              <!-- caja a la espalda -->
+              <rect x="86" y="70" width="34" height="34" rx="6" fill="#111"/>
+              <text x="103" y="93" font-size="18" font-weight="900" fill="#F26522" stroke="none" text-anchor="middle" font-family="Arial">F</text>
+              <path d="M34 140 q0-34 34-34 q22 0 30 14 z" fill="#F26522"/>
+              <circle cx="63" cy="64" r="28" fill="#FFC233"/>
+              <!-- casco -->
+              <path d="M37 62 a26 24 0 0 1 52 0 z" fill="#111"/>
+              <rect x="70" y="56" width="20" height="9" rx="4" fill="#bfe3ff"/>
+              <circle cx="60" cy="66" r="3" fill="#111" stroke="none"/>
+              <path d="M52 78 q11 8 22 2" fill="none" stroke-width="3.5"/>
+              <!-- brazo saludando -->
+              <path d="M40 112 q-16-6-16-24" fill="none"/>
+              <circle cx="24" cy="86" r="6" fill="#FFC233"/>
+            </g>
+          </svg>
         </div>
+        <h3>Repartidores</h3>
+        <p>Ve pedidos disponibles, tómalos y navega al destino con Google Maps.</p>
         <ul>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="#F26522" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg>Toma de pedidos sin conflictos</li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="#F26522" stroke-width="3"><path d="M5 12l5 5L20 7"/></svg>Navegación GPS al cliente</li>
@@ -357,7 +494,7 @@
 <!-- PAGOS -->
 <section>
   <div class="wrap">
-    <div class="pay">
+    <div class="pay reveal">
       <h2>Paga como en Yantzaza</h2>
       <p>Sin tarjetas obligatorias. Usa el medio de pago que ya conoces.</p>
       <div class="pay-badges">
@@ -372,7 +509,7 @@
 <!-- DESCARGA -->
 <section id="descarga" style="padding-top:30px;">
   <div class="wrap">
-    <div class="download">
+    <div class="download reveal">
       <div>
         <span class="eyebrow">Muy pronto</span>
         <h2>Lleva FTFD en tu bolsillo</h2>
@@ -409,34 +546,29 @@
 <!-- FAQ -->
 <section id="faq" style="background:var(--crema);">
   <div class="wrap">
-    <div class="sec-head">
+    <div class="sec-head reveal">
       <span class="eyebrow">Dudas</span>
       <h2>Preguntas frecuentes</h2>
     </div>
-    <div class="faq">
+    <div class="faq reveal">
       <details class="q" open>
-        <summary>¿En qué ciudad funciona FTFD?
-          <svg class="plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg></summary>
+        <summary>¿En qué ciudad funciona FTFD?<svg class="plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg></summary>
         <div class="a">FTFD arranca en el cantón <b>Yantzaza</b>, provincia de Zamora Chinchipe, Ecuador. Pronto llegaremos a más lugares.</div>
       </details>
       <details class="q">
-        <summary>¿Cómo puedo pagar mi pedido?
-          <svg class="plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg></summary>
+        <summary>¿Cómo puedo pagar mi pedido?<svg class="plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg></summary>
         <div class="a">Puedes pagar en <b>efectivo</b> al recibir, por <b>transferencia</b> bancaria o con <b>De Una</b>. No necesitas tarjeta de crédito.</div>
       </details>
       <details class="q">
-        <summary>¿Puedo seguir mi pedido?
-          <svg class="plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg></summary>
+        <summary>¿Puedo seguir mi pedido?<svg class="plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg></summary>
         <div class="a">Sí. Verás el estado en vivo: confirmado por el local, en preparación, repartidor asignado, en camino y entregado.</div>
       </details>
       <details class="q">
-        <summary>Tengo un local, ¿cómo me uno?
-          <svg class="plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg></summary>
+        <summary>Tengo un local, ¿cómo me uno?<svg class="plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg></summary>
         <div class="a">Escríbenos a <a href="mailto:ftfd.oficial@gmail.com" style="color:var(--naranja);font-weight:700">ftfd.oficial@gmail.com</a> y te registramos con tu panel para recibir pedidos y gestionar tu menú.</div>
       </details>
       <details class="q">
-        <summary>¿Quiero ser repartidor?
-          <svg class="plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg></summary>
+        <summary>¿Quiero ser repartidor?<svg class="plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg></summary>
         <div class="a">También puedes registrarte como repartidor desde la app y empezar a tomar pedidos disponibles en Yantzaza.</div>
       </details>
     </div>
@@ -446,7 +578,8 @@
 <!-- CTA FINAL -->
 <section>
   <div class="wrap">
-    <div class="cta-final">
+    <div class="cta-final reveal">
+      <svg class="pin" style="top:-20px;left:-10px" width="140" height="140" viewBox="0 0 24 24" fill="#fff"><path d="M12 2a7 7 0 00-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 00-7-7z"/></svg>
       <h2>¿Listo para pedir en Yantzaza?</h2>
       <p>Descarga FTFD y recibe de tus locales favoritos con entrega local y confiable.</p>
       <a href="#descarga" class="btn btn-dark">Descargar la app</a>
@@ -459,30 +592,16 @@
   <div class="wrap">
     <div class="foot-grid">
       <div class="foot-brand">
-        <a href="#" class="brand">
-          <span class="mark">F<b>T</b>D</span>
-          <span>FTFD<small>Fast · Trusted · Flexible</small></span>
-        </a>
+        <a href="#" class="brand"><span class="mark">F<b>T</b>D</span><span>FTFD<small>Fast · Trusted · Flexible</small></span></a>
         <p>Plataforma de delivery para el cantón Yantzaza, Zamora Chinchipe — Ecuador. Rápido, confiable y local.</p>
       </div>
-      <div>
-        <h4>Plataforma</h4>
-        <ul>
-          <li><a href="#como">Cómo funciona</a></li>
-          <li><a href="#perfiles">Para locales</a></li>
-          <li><a href="#perfiles">Repartidores</a></li>
-          <li><a href="#faq">Preguntas</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4>Contacto</h4>
-        <ul>
-          <li><a href="mailto:ftfd.oficial@gmail.com">ftfd.oficial@gmail.com</a></li>
-          <li>Yantzaza, Zamora Chinchipe</li>
-          <li>Ecuador</li>
-          <li><a href="privacidad.html">Política de privacidad</a></li>
-        </ul>
-      </div>
+      <div><h4>Plataforma</h4><ul>
+        <li><a href="#como">Cómo funciona</a></li><li><a href="#perfiles">Para locales</a></li>
+        <li><a href="#perfiles">Repartidores</a></li><li><a href="#faq">Preguntas</a></li></ul></div>
+      <div><h4>Contacto</h4><ul>
+        <li><a href="mailto:ftfd.oficial@gmail.com">ftfd.oficial@gmail.com</a></li>
+        <li>Yantzaza, Zamora Chinchipe</li><li>Ecuador</li>
+        <li><a href="privacidad.html">Política de privacidad</a></li></ul></div>
     </div>
     <div class="foot-bottom">
       <span>© <span id="y"></span> FTFD — Fast, Trusted &amp; Flexible Delivery</span>
@@ -496,6 +615,11 @@
   var mb=document.getElementById('menubtn'),nl=document.getElementById('navlinks');
   mb.addEventListener('click',function(){nl.classList.toggle('open');});
   nl.addEventListener('click',function(e){if(e.target.tagName==='A')nl.classList.remove('open');});
+  // duplicar categorías para marquee infinito
+  var mt=document.getElementById('mtrack'); if(mt){mt.innerHTML+=mt.innerHTML;}
+  // scroll reveal
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.15});
+  document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
 </script>
 </body>
 </html>
