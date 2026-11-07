@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FTFD — Fast, Trusted &amp; Flexible Delivery</title>
+<style>
+  :root{--naranja:#F26522;--negro:#111111;--gris:#666;--linea:#e6e6e6;}
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--negro);background:#fff;line-height:1.55;}
+  header{background:var(--negro);color:#fff;padding:18px 24px;display:flex;align-items:center;gap:12px;}
+  .logo{font-weight:800;letter-spacing:1px;font-size:22px;}
+  .logo span{color:var(--naranja);}
+  .hero{max-width:860px;margin:0 auto;padding:56px 24px 32px;}
+  .hero h1{font-size:34px;line-height:1.15;margin:0 0 10px;}
+  .hero h1 b{color:var(--naranja);}
+  .hero p.lead{font-size:18px;color:var(--gris);margin:0 0 28px;}
+  .bar{height:4px;background:var(--naranja);width:72px;border-radius:2px;margin:0 0 28px;}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;margin:8px 0 36px;}
+  .card{border:1px solid var(--linea);border-radius:12px;padding:18px;}
+  .card h3{margin:0 0 6px;font-size:16px;}
+  .card p{margin:0;color:var(--gris);font-size:14px;}
+  .contact{background:#faf7f5;border-top:1px solid var(--linea);padding:36px 24px;}
+  .contact .inner{max-width:860px;margin:0 auto;}
+  a{color:var(--naranja);}
+  footer{max-width:860px;margin:0 auto;padding:24px;color:var(--gris);font-size:13px;border-top:1px solid var(--linea);}
+  footer a{color:var(--gris);}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">F<span>T</span>FD</div>
+  <div style="font-size:13px;opacity:.8;">Fast, Trusted &amp; Flexible Delivery</div>
+</header>
+
+<section class="hero">
+  <div class="bar"></div>
+  <h1>Pide de tus locales favoritos en <b>Yantzaza</b>, con entrega local y confiable.</h1>
+  <p class="lead">FTFD conecta a clientes, locales y repartidores del cantón Yantzaza (Zamora Chinchipe, Ecuador) en una sola aplicación simple y rápida.</p>
+
+  <div class="grid">
+    <div class="card"><h3>Para clientes</h3><p>Elige un local, arma tu pedido y sigue el estado en vivo hasta la entrega.</p></div>
+    <div class="card"><h3>Para locales</h3><p>Recibe pedidos con alerta, gestiona tu menú y tus horarios desde un panel.</p></div>
+    <div class="card"><h3>Para repartidores</h3><p>Toma pedidos disponibles y navega al destino con Google Maps.</p></div>
+    <div class="card"><h3>Pagos locales</h3><p>Efectivo, transferencia y De Una. Sin complicaciones.</p></div>
+  </div>
+</section>
+
+<section class="contact">
+  <div class="inner">
+    <h2 style="margin:0 0 8px;">Contacto</h2>
+    <p style="margin:0;color:var(--gris);">
+      Correo: <a href="mailto:CORREO_OFICIAL_FTFD">CORREO_OFICIAL_FTFD</a><br>
+      Yantzaza, Zamora Chinchipe — Ecuador
+    </p>
+  </div>
+</section>
+
+<footer>
+  © <span id="y"></span> FTFD — Fast, Trusted &amp; Flexible Delivery ·
+  <a href="privacidad.html">Política de privacidad</a>
+  <script>document.getElementById('y').textContent=new Date().getFullYear();</script>
+</footer>
+</body>
+</html>
